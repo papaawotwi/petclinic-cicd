@@ -38,7 +38,7 @@ resource "aws_iam_role_policy_attachment" "ecs_execution" {
 data "aws_iam_policy_document" "ecs_execution_secrets" {
   statement {
     actions   = ["secretsmanager:GetSecretValue"]
-    resources = [aws_secretsmanager_secret.db.arn]
+    resources = [aws_secretsmanager_secret.db1.arn]
   }
 }
 
@@ -92,13 +92,12 @@ resource "aws_ecs_task_definition" "app" {
 
       secrets = [
         {
-          name      = "POSTGRES_USER"
-          valueFrom = "${aws_secretsmanager_secret.db.arn}:username::"
+          
+         name      = "POSTGRES_PASS"
+         valueFrom = "${aws_secretsmanager_secret.db1.arn}:password::"
         },
-        {
-          name      = "POSTGRES_PASS"
-          valueFrom = "${aws_secretsmanager_secret.db.arn}:password::"
-        }
+        
+       
       ]
 
       logConfiguration = {
