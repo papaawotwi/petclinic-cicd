@@ -164,7 +164,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app-jar
-          path: .
+          path: target
  
       - name: Run Trivy filesystem scan
         uses: aquasecurity/trivy-action@master
@@ -196,7 +196,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app-jar
-          path: .
+          path: target
  
       - name: Authenticate to Vault and fetch JFrog credentials
         uses: hashicorp/vault-action@v3
